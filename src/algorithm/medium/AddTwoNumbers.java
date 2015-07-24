@@ -1,14 +1,13 @@
 package algorithm.medium;
 
 /**
- * Add Two Numbers Total Accepted: 
+ * Add Two Numbers Total Accepted:
  * 
- * You are given two linked lists representing two non-negative numbers. 
- * The digits are stored in reverse order and each of their nodes contain a single digit. 
- * Add the two numbers and return it as a linked list.
+ * You are given two linked lists representing two non-negative numbers. The
+ * digits are stored in reverse order and each of their nodes contain a single
+ * digit. Add the two numbers and return it as a linked list.
  * 
- * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
- * Output: 7 -> 0 -> 8
+ * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4) Output: 7 -> 0 -> 8
  * 
  * @author frenmanoj
  */
@@ -20,60 +19,36 @@ public class AddTwoNumbers {
 		ListNode firstNode = new ListNode(-1);
 		ListNode lastNode = firstNode;
 
+		int sum = 0;
 		int carryOver = 0;
 
-		while (l1 != null && l2 != null) {
+		while (l1 != null || l2 != null) {
 
-			int sum = l1.val + l2.val + carryOver;
+			sum = carryOver;
 
-			carryOver = addToResultNode(lastNode, sum);
+			if (l1 != null) {
+
+				sum += l1.val;
+				l1 = l1.next;
+			}
+
+			if (l2 != null) {
+
+				sum += l2.val;
+				l2 = l2.next;
+			}
+
+			carryOver = sum / 10;
+			lastNode.next = new ListNode(sum % 10);
 			lastNode = lastNode.next;
 
-			l1 = l1.next;
-			l2 = l2.next;
-		}
-
-		while (l1 != null) {
-
-			int sum = l1.val + carryOver;
-
-			carryOver = addToResultNode(lastNode, sum);
-			lastNode = lastNode.next;
-
-			l1 = l1.next;
-		}
-
-		while (l2 != null) {
-
-			int sum = l2.val + carryOver;
-
-			carryOver = addToResultNode(lastNode, sum);
-			lastNode = lastNode.next;
-
-			l2 = l2.next;
 		}
 
 		if (carryOver == 1) {
-
 			lastNode.next = new ListNode(carryOver);
 		}
 
 		return firstNode.next;
-	}
-
-	private int addToResultNode(ListNode lastNode, int sum) {
-
-		int carryOver = 0;
-
-		if (sum >= 10) {
-
-			sum = sum % 10;
-			carryOver = 1;
-		}
-
-		lastNode.next = new ListNode(sum);
-
-		return carryOver;
 	}
 
 	public static void main(String[] args) {
