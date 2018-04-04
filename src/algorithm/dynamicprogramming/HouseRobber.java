@@ -31,6 +31,8 @@ public class HouseRobber {
 			lastMax = currentMax;
 		}
 
+		System.out.printf("hello");
+
 		return lastMax;
 	}
 }
