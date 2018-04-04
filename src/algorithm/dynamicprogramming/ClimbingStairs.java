@@ -31,6 +31,8 @@ public class ClimbingStairs {
 			f2 = f;
 		}
 
+		System.out.println("hi");
+
 		return f;
 	}
 }
